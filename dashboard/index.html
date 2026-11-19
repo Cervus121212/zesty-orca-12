@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Launch Radar — fitted value model for pre-token protocols</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div class="title-block">
+    <h1>Launch Radar</h1>
+    <p class="subtitle">Every pre-token protocol in the 14 Nov 2026 snapshot, ranked by an implied
+    market value fitted from the snapshot's own traded tokens — not a hand-made multiple.</p>
+    <p class="meta" id="meta-line"></p>
+  </div>
+  <div class="kpi" id="kpi-strip"></div>
+</header>
+
+<main>
+  <section class="toolbar" aria-label="Board controls">
+    <input id="q" type="search" placeholder="Search name or slug…" aria-label="Search">
+    <select id="cat" aria-label="Category filter"><option value="">All categories</option></select>
+    <select id="verdict" aria-label="Verdict filter">
+      <option value="">All verdicts</option>
+      <option value="Farm">Farm</option>
+      <option value="Thin">Thin</option>
+      <option value="Skip">Skip</option>
+    </select>
+    <label class="check"><input id="watch" type="checkbox"> Watchlist only</label>
+    <span class="count" id="row-count"></span>
+  </section>
+
+  <section class="board-wrap">
+    <table id="board">
+      <thead><tr>
+        <th data-sort="rank">Rank</th>
+        <th data-sort="name">Protocol</th>
+        <th data-sort="category">Category</th>
+        <th data-sort="tvl_usd">TVL</th>
+        <th data-sort="implied_value_usd">Implied value</th>
+        <th data-sort="rank_band">Rank band</th>
+        <th data-sort="net_usd">Net $</th>
+        <th data-sort="usd_per_hour">$/hour</th>
+        <th data-sort="verdict">Verdict</th>
+      </tr></thead>
+      <tbody id="board-body"></tbody>
+    </table>
+  </section>
+
+  <section id="detail" class="detail" hidden>
+    <button id="detail-close" type="button">Close ×</button>
+    <div id="detail-body"></div>
+  </section>
+
+  <section class="method" id="method">
+    <h2>How the value is fitted</h2>
+    <div id="method-body"></div>
+  </section>
+
+  <section class="comps">
+    <h2>The comps: traded tokens the model learns from</h2>
+    <p class="note">The 24 largest traded tokens by market cap. The full fit uses all 128
+    protocols with a positive market cap and TVL; the 16 live-token rows with a market
+    cap of 0 or −1 in the snapshot cannot be comps.</p>
+    <table id="comps-table">
+      <thead><tr><th>Protocol</th><th>Category</th><th>TVL</th><th>Market cap</th><th>mcap / TVL</th></tr></thead>
+      <tbody id="comps-body"></tbody>
+    </table>
+  </section>
+
+  <section class="audit">
+    <h2>Coverage audit</h2>
+    <div id="audit-body"></div>
+  </section>
+</main>
+
+<footer>
+  <p>Launch Radar v3. Snapshot sealed 14 Nov 2026, source DefiLlama. Model fitted at run
+  time from the snapshot itself; validation numbers measured by research/validate.py on
+  the same snapshot. A launch is never a prediction — the value is what the market
+  pays for comparable TVL today, and the farm math is what that is worth to one farmer.</p>
+</footer>
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
